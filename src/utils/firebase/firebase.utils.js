@@ -6,19 +6,18 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
-// Your web app's Firebase configuration
+
 const firebaseConfig = {
-  apiKey: "AIzaSyC6KSRKfM_X-Lwgme67NcaTjyJApOhIgPE",
-  authDomain: "clothing-ecommerce-db-89322.firebaseapp.com",
-  projectId: "clothing-ecommerce-db-89322",
-  storageBucket: "clothing-ecommerce-db-89322.appspot.com",
-  messagingSenderId: "237685853252",
-  appId: "1:237685853252:web:63c4b185540fde3fb5c011",
+  apiKey: "AIzaSyDDU4V-_QV3M8GyhC9SVieRTDM4dbiT0Yk",
+  authDomain: "crwn-clothing-db-98d4d.firebaseapp.com",
+  projectId: "crwn-clothing-db-98d4d",
+  storageBucket: "crwn-clothing-db-98d4d.appspot.com",
+  messagingSenderId: "626766232035",
+  appId: "1:626766232035:web:506621582dab103a4d08d6",
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
@@ -71,8 +70,14 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 
   return await createUserWithEmailAndPassword(auth, email, password);
 };
+
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
   return await signInWithEmailAndPassword(auth, email, password);
 };
+
+export const signOutUser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);
